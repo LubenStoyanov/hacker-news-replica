@@ -1,16 +1,14 @@
+import { Button, TextField, Container, Box } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
 
-export default function UserInput({ setStories }) {
+export default function UserInput({ handleFetch, setCountPage }) {
   const [searchText, setSearchText] = useState("");
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    const url = "http://hn.algolia.com/api/v1/search?query=";
-    const endpoint = url + searchText;
-
-    const promise = await fetch(endpoint);
-    const data = await promise.json();
-    setStories(data.hits);
+    setCountPage(0);
+    handleFetch(searchText);
   };
 
   const handleOnChange = (event) => {
@@ -18,14 +16,19 @@ export default function UserInput({ setStories }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} action="">
-      <input
-        onChange={handleOnChange}
-        type="text"
-        name="user-input"
-        id="user-input"
-      />
-      <button type="submit">Search</button>
-    </form>
+    <Container>
+      <Box component="form" onSubmit={handleSubmit} action="#">
+        <TextField
+          id="outlined-search-size-small"
+          label="Search field"
+          type="search"
+          size="small"
+          onChange={handleOnChange}
+        />
+        <Button type="submit" variant="text" size="small">
+          <SearchIcon fontSize="large" />
+        </Button>
+      </Box>
+    </Container>
   );
 }
