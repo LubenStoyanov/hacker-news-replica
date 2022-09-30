@@ -1,29 +1,21 @@
 import { Button, TextField, Container, Box } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { useState } from "react";
 
-export default function UserInput({ handleFetch, setCountPage }) {
-  const [searchText, setSearchText] = useState("");
-
+export default function UserInput({ setSearchText }) {
   const handleSubmit = (event) => {
     event.preventDefault();
-    setCountPage(0);
-    handleFetch(searchText);
-  };
-
-  const handleOnChange = (event) => {
-    setSearchText((s) => (s = event.target.value));
+    setSearchText((st) => (st = event.target[0].value));
   };
 
   return (
     <Container>
-      <Box component="form" onSubmit={handleSubmit} action="#">
+      <Box component="form" onSubmit={handleSubmit} action="">
         <TextField
           id="outlined-search-size-small"
           label="Search field"
           type="search"
           size="small"
-          onChange={handleOnChange}
+          name="searchText"
         />
         <Button type="submit" variant="text" size="small">
           <SearchIcon fontSize="large" />
