@@ -1,3 +1,4 @@
+import { Container } from "@mui/material";
 import Story from "./Story";
 
 export default function List({ stories }) {
@@ -6,5 +7,10 @@ export default function List({ stories }) {
       <Story storyItem={story} />
     </li>
   ));
-  return <ol>{listStories}</ol>;
+
+  return (
+    <Container>
+      <ol>{listStories}</ol>
+    </Container>
+  );
 }
